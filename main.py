@@ -5,7 +5,7 @@ def init_colors():
     
     soluce = []
     for i in range(4):
-        soluce += COLORS[random.randint(0,3)]
+        soluce.append(random.choice(COLORS))
     return soluce
 
 def reminder_color():
@@ -46,11 +46,44 @@ def ask_color():
         except ValueError:
             reminder_color()
 
+def check_guess(soluce, player_input):
+    # init count
+    right = 0
+    wplace = 0
+
+    # well placed
+    soluce_rest = []
+    input_rest = []
+    for i in range(4):
+        if soluce[i] == player_input[i]:
+            right += 1
+        else:
+            #keep value to count missed place
+            soluce_rest.append(soluce[i])
+            input_rest.append(player_input[i])
+
+    
+    for color in input_rest:
+        if color in soluce_rest:
+            wplace += 1
+            #remove match in soluce list to avoid double
+            soluce_rest.remove(color)
+
+    print(f"Right color and position: {right}, correct color wrong position: {wplace}")
+
+        
+        
+
+
         
 
 def mastermind() :
-    print(init_colors())
-    print(ask_color())
+    soluce = init_colors()
+    print(soluce)
+    reminder_color()
+    guess =ask_color()
+    check_guess(soluce, guess)
+
 
 if __name__ == "__main__":
     mastermind()
