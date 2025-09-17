@@ -77,21 +77,21 @@ def check_guess(soluce, player_input, found):
     return found
         
 
-
-        
-        
-
-
-        
-
 def mastermind() :
     soluce = init_colors()
+    turn = 1
     print(soluce)
     reminder_color()
     playing = True
-    while playing :
+    while playing and turn <= 12:
+        print(f"Turn number : {turn}")
         guess =ask_color()
         playing = check_guess(soluce, guess, playing)
+        turn += 1
+    if playing :
+        print("You loose")
+    else:
+        print("Congrats")
         
 
 
