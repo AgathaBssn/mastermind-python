@@ -1,10 +1,12 @@
 COLORS = ['R', 'G', 'B', 'Y', 'P', 'W']
+NB_TRY = 12
+GUESS_LENGHT = 4
 #Drawing of 4 colors for the round
 def init_colors():
     import random
     
     soluce = []
-    for i in range(4):
+    for i in range(GUESS_LENGHT):
         soluce.append(random.choice(COLORS))
     return soluce
 
@@ -22,10 +24,10 @@ def split_colors(input_str):
 def ask_color():
     while True:
         try:
-            guess = input("Submit 4 colors : ")
+            guess = input(f"Submit {GUESS_LENGHT} colors : ")
 
-            #check if there are 4 characters
-            if len(guess) != 4 :
+            #check if there are  characters
+            if len(guess) != GUESS_LENGHT :
                 raise TypeError("Wrong length")
             
             guess = split_colors(guess)
@@ -54,7 +56,7 @@ def check_guess(soluce, player_input, found):
     # well placed
     soluce_rest = []
     input_rest = []
-    for i in range(4):
+    for i in range(len(soluce)):
         if soluce[i] == player_input[i]:
             right += 1
         else:
@@ -71,7 +73,7 @@ def check_guess(soluce, player_input, found):
 
     print(f"Right color and position: {right}, correct color wrong position: {wplace}")
 
-    if right == 4:
+    if right == len(soluce):
         found = False
 
     return found
@@ -83,7 +85,7 @@ def mastermind() :
     print(soluce)
     reminder_color()
     playing = True
-    while playing and turn <= 12:
+    while playing and turn <= NB_TRY:
         print(f"Turn number : {turn}")
         guess =ask_color()
         playing = check_guess(soluce, guess, playing)
