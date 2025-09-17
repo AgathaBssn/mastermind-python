@@ -46,7 +46,7 @@ def ask_color():
         except ValueError:
             reminder_color()
 
-def check_guess(soluce, player_input):
+def check_guess(soluce, player_input, found):
     # init count
     right = 0
     wplace = 0
@@ -71,6 +71,13 @@ def check_guess(soluce, player_input):
 
     print(f"Right color and position: {right}, correct color wrong position: {wplace}")
 
+    if right == 4:
+        found = False
+
+    return found
+        
+
+
         
         
 
@@ -81,8 +88,12 @@ def mastermind() :
     soluce = init_colors()
     print(soluce)
     reminder_color()
-    guess =ask_color()
-    check_guess(soluce, guess)
+    playing = True
+    while playing :
+        guess =ask_color()
+        playing = check_guess(soluce, guess, playing)
+        
+
 
 
 if __name__ == "__main__":
