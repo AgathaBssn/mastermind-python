@@ -25,8 +25,7 @@ def ask_color():
     while True:
         try:
             guess = (input(f"Submit {GUESS_LENGHT} colors : "))
-            guess = guess.upper()
-            guess = guess.strip()
+            guess = guess.upper().strip()
 
             #check if there are  characters
             if len(guess) != GUESS_LENGHT :
