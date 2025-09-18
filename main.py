@@ -1,6 +1,7 @@
 COLORS = ['R', 'G', 'B', 'Y', 'P', 'W']
 NB_TRY = 12
 GUESS_LENGHT = 4
+SCORE_FILE = ".scores"
 #Drawing of 4 colors for the round
 def init_colors():
     import random
@@ -97,7 +98,7 @@ def round() -> bool:
     return win
 
 def update_score(current_score, current_nbgames):
-    f = open('scores', 'r', encoding="utf-8")
+    f = open(SCORE_FILE, 'r', encoding="utf-8")
     #first line is nbgames in total
     total_nbgames = int(f.readline())
     #second is score
@@ -107,13 +108,18 @@ def update_score(current_score, current_nbgames):
     total_nbgames += current_nbgames
     total_score += current_score
 
-    f = open('scores', 'w', encoding="utf-8")
+    f = open(SCORE_FILE, 'w', encoding="utf-8")
     f.write(f"{total_nbgames}\n{total_score}\n")
     f.close()
 
-
-
-
+def display_score():
+    f = open(SCORE_FILE, 'r', encoding="utf-8")
+    #first line is nbgames in total
+    total_nbgames = int(f.readline())
+    #second is score
+    total_score =  int(f.readline())
+    f.close()
+    print(f"Game played : {total_nbgames}, game won : {total_score}\n")
 
 def menu():
     var_score = 0
@@ -134,6 +140,7 @@ def menu():
                 exit()
             elif answer == str("3"):
                 update_score(var_score, var_nbgames)
+                display_score()
             else :
                 print("Choose a valid option")
         except KeyboardInterrupt:
