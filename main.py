@@ -22,7 +22,8 @@ def split_colors(input_str):
 
 #Get a valid answer from the player
 def ask_color():
-    while True:
+    still_asking = True
+    while still_asking:
         try:
             guess = (input(f"Submit {GUESS_LENGHT} colors : "))
             guess = guess.upper().strip()
@@ -39,6 +40,7 @@ def ask_color():
                     raise ValueError("Invalid input")
                 
             #all good
+            
             return guess
         # if player kill program
         except KeyboardInterrupt:
@@ -82,7 +84,7 @@ def check_guess(soluce, player_input, found):
 def round() -> bool:
     soluce = init_colors()
     turn = 1
-    print(soluce)
+    #print(soluce)
     reminder_color()
     playing = True
     while playing and turn <= NB_TRY:
