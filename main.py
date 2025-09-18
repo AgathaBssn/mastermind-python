@@ -24,7 +24,8 @@ def split_colors(input_str):
 def ask_color():
     while True:
         try:
-            guess = input(f"Submit {GUESS_LENGHT} colors : ")
+            guess = (input(f"Submit {GUESS_LENGHT} colors : "))
+            guess = guess.upper()
 
             #check if there are  characters
             if len(guess) != GUESS_LENGHT :
@@ -135,11 +136,12 @@ def menu():
                 var_nbgames += 1
                 if score :
                     var_score += 1
+                update_score(var_score, var_nbgames)
+                display_score()
             elif answer == str("2"):
                 print("See you next time !")
                 exit()
             elif answer == str("3"):
-                update_score(var_score, var_nbgames)
                 display_score()
             else :
                 print("Choose a valid option")
