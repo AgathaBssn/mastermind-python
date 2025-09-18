@@ -78,7 +78,7 @@ def check_guess(soluce, player_input, found):
 
     return found
 
-def round():
+def round() -> bool:
     soluce = init_colors()
     turn = 1
     print(soluce)
@@ -86,29 +86,31 @@ def round():
     playing = True
     while playing and turn <= NB_TRY:
         print(f"Turn number : {turn}")
-        guess =ask_color()
+        guess = ask_color()
         playing = check_guess(soluce, guess, playing)
         turn += 1
-    if playing :
+    if playing:
+        win = False
         print("You loose")
     else:
+        win = True
         print("Congrats")
-    
-    menu()
+    return win
 
 def menu():
-    try :
-        answer = input("What do you want to do : \n" \
-        "   1 - Play \n"
-        "   2 - Leave \n")
-        if answer == str("1"):
-            round()
-        elif answer == str("2"):
-            print("See you next time !")
-            exit()
-    except KeyboardInterrupt:
-                print("\nInterruption du programme.")
+    while True :
+        try :
+            answer = input("What do you want to do : \n" \
+            "   1 - Play \n"
+            "   2 - Leave \n")
+            if answer == str("1"):
+                round()
+            elif answer == str("2"):
+                print("See you next time !")
                 exit()
+        except KeyboardInterrupt:
+                    print("\nInterruption du programme.")
+                    exit()
 
 def mastermind() :
     menu()
