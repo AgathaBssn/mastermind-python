@@ -98,10 +98,14 @@ def round():
 
 def menu():
     try :
-        answer = input("Que veux tu faire : \n" \
-        "   1 - Jouer \n")
+        answer = input("What do you want to do : \n" \
+        "   1 - Play \n"
+        "   2 - Leave \n")
         if answer == str("1"):
             round()
+        elif answer == str("2"):
+            print("See you next time !")
+            exit()
     except KeyboardInterrupt:
                 print("\nInterruption du programme.")
                 exit()
