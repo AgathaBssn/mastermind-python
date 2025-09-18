@@ -4,7 +4,6 @@ GUESS_LENGHT = 4
 #Drawing of 4 colors for the round
 def init_colors():
     import random
-    
     soluce = []
     for i in range(GUESS_LENGHT):
         soluce.append(random.choice(COLORS))
@@ -97,22 +96,52 @@ def round() -> bool:
         print("Congrats")
     return win
 
+def update_score(current_score, current_nbgames):
+    f = open('scores', 'r', encoding="utf-8")
+    #first line is nbgames in total
+    total_nbgames = int(f.readline())
+    #second is score
+    total_score =  int(f.readline())
+    f.close()
+
+    total_nbgames += current_nbgames
+    total_score += current_score
+
+    f = open('scores', 'w', encoding="utf-8")
+    f.write(f"{total_nbgames}\n{total_score}\n")
+    f.close()
+
+
+
+
+
 def menu():
+    var_score = 0
+    var_nbgames = 0
     while True :
         try :
             answer = input("What do you want to do : \n" \
             "   1 - Play \n"
-            "   2 - Leave \n")
+            "   2 - Leave \n"
+            "   3 - Score \n")
             if answer == str("1"):
-                round()
+                score = round()
+                var_nbgames += 1
+                if score :
+                    var_score += 1
             elif answer == str("2"):
                 print("See you next time !")
                 exit()
+            elif answer == str("3"):
+                update_score(var_score, var_nbgames)
+            else :
+                print("Choose a valid option")
         except KeyboardInterrupt:
-                    print("\nInterruption du programme.")
+                    print("\nProgram interruption.")
                     exit()
 
 def mastermind() :
+    
     menu()
     
     
