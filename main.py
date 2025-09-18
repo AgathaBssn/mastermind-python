@@ -77,9 +77,8 @@ def check_guess(soluce, player_input, found):
         found = False
 
     return found
-        
 
-def mastermind() :
+def round():
     soluce = init_colors()
     turn = 1
     print(soluce)
@@ -94,6 +93,23 @@ def mastermind() :
         print("You loose")
     else:
         print("Congrats")
+    
+    menu()
+
+def menu():
+    try :
+        answer = input("Que veux tu faire : \n" \
+        "   1 - Jouer \n")
+        if answer == str("1"):
+            round()
+    except KeyboardInterrupt:
+                print("\nInterruption du programme.")
+                exit()
+
+def mastermind() :
+    menu()
+    
+    
         
 
 
